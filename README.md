@@ -11,11 +11,7 @@ forge build
 ```shell
 forge test
 ```
-### 安装不可升级合约库
-```shell
-forge install OpenZeppelin/openzeppelin-contracts@4.3.2 --no-commit
-```
-### 安装可升级合约库
+### 安装可不升级合约库
 ```shell
 forge install OpenZeppelin/openzeppelin-contracts --no-commit
 ```
@@ -26,10 +22,6 @@ forge install OpenZeppelin/openzeppelin-contracts-upgradeable --no-commit
 ## 生成remappings.txt
 ```shell
 forge remappings > remappings.txt
-```
-### 安装可升级合约库
-```shell
-forge install OpenZeppelin/openzeppelin-contracts-upgradeable --no-commit
 ```
 ### 启动本地测试网节点
 ```shell
