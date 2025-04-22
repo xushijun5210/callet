@@ -10,13 +10,14 @@ import "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol";
 import "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 
 import "../src/TreasureManager.sol";
-import "../test/EmptyContract.sol";
+import "../src/EmptyContract.sol";
 
 contract TreasureManagerV2Script is Script {
     TreasureManager public treasureManagerV2;
     TreasureManager public treasureManagerV2Implementation;
     ProxyAdmin public treasureManagerV2ProxyAdmin;
 
+    // 部署 TreasureManagerV2 的实现合约并升级现有代理合约
     function run() public {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
 
@@ -36,6 +37,7 @@ contract TreasureManagerV2Script is Script {
         vm.stopBroadcast();
     }
 
+    // 获取指定代理合约的 ProxyAdmin 地址
     function getProxyAdminAddress(address proxy) internal view returns (address) {
         address CHEATCODE_ADDRESS = 0x7109709ECfa91a80626fF3989D68f67F5b1DD12D;
         Vm vm = Vm(CHEATCODE_ADDRESS);

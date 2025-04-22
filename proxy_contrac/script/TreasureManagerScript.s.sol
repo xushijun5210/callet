@@ -13,25 +13,28 @@ import "../src/TreasureManager.sol";
 import "../test/EmptyContract.sol";
 
 contract TreasureManagerScript is Script {
+    //此合约定义了部署和升级TreasureManager智能合约的脚本。
+    TreasureManagerScript.s.sol
+    
     EmptyContract public emptyContract;
     TreasureManager public treasureManager;
     TreasureManager public treasureManagerImplementation;
     ProxyAdmin public treasureManagerProxyAdmin;
-
+    
     function run() public {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         address deployerAddress = vm.addr(deployerPrivateKey);
-
+    
         vm.startBroadcast(deployerPrivateKey);
-
+    
         emptyContract = new EmptyContract();
         TransparentUpgradeableProxy proxyTreasureManager = new TransparentUpgradeableProxy(address(emptyContract), deployerAddress, "");
-
+    
         treasureManager = TreasureManager(payable(address(proxyTreasureManager)));
-
+    
         treasureManagerImplementation = new TreasureManager();
         treasureManagerProxyAdmin = ProxyAdmin(getProxyAdminAddress(address(proxyTreasureManager)));
-
+    
         treasureManagerProxyAdmin.upgradeAndCall(
             ITransparentUpgradeableProxy(address(treasureManager)),
             address(treasureManagerImplementation),
@@ -42,13 +45,13 @@ contract TreasureManagerScript is Script {
                 msg.sender
             )
         );
-
+    
         console.log("address=====", address(treasureManager));
         console.log("treasureManagerProxyAdmin=====", address(treasureManagerProxyAdmin));
-
+    
         vm.stopBroadcast();
     }
-
+    
     function getProxyAdminAddress(address proxy) internal view returns (address) {
         address CHEATCODE_ADDRESS = 0x7109709ECfa91a80626fF3989D68f67F5b1DD12D;
         Vm vm = Vm(CHEATCODE_ADDRESS);
