@@ -10,13 +10,13 @@ interface ITreasureManager {
     // 存入 ERC20 代币到合约
     function depositERC20(IERC20 tokenAddress, uint256 amount) external returns (bool);
 
-    // 发放奖励给指定地址
+    // 给tokenAddress地址授权可以给receiptAddress地址发放amount数量的代币奖励
     function grantRewards(address tokenAddress, address receiptAddress, uint256 amount) external;
 
-    // 提取所有可用代币
+    // 任何人都可以存人所有可用代币
     function claimAllTokens() external;
 
-    // 提取指定代币
+    // 任何人都可以存人代币
     function claimToken(address tokenAddress) external;
 
     // 从合约中提取以太币

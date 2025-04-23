@@ -27,9 +27,14 @@ forge remappings > remappings.txt
 ```shell
 anvil
 ```
+### 声明PRIVATE_KEY
+```shell
+export PRIVATE_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+```
 ### 部署合约
 ```shell
 forge script script/xxx.s.sol:xxxScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+forge script ./script/TreasureManagerScript.s.sol:reasureManagerScript --rpc-url 127.0.0.1:8545  --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --broadcast
 ```
 ## 验证合约：步骤分为生成验证数据和执行验证命令
 ## 设置 EtherScan API Key

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
-
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
@@ -11,12 +10,13 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./interface/ITreasureManager.sol";
 
 contract TreasureManager is Initializable, OwnableUpgradeable, AccessControlUpgradeable, ReentrancyGuardUpgradeable, ITreasureManager {
+    //给SafeERC20定义一个别名为IERC20
     using SafeERC20 for IERC20;
 
     // 定义以太币地址常量
     address public constant ethAddress = address(0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE);
 
-    // 定义宝藏管理器地址
+    // 定义授权合约地址
     address public treasureManager;
     // 定义提币管理器地址
     address public withdrawManager;
@@ -32,14 +32,14 @@ contract TreasureManager is Initializable, OwnableUpgradeable, AccessControlUpgr
     // 自定义错误，用于地址为零的情况
     error IsZeroAddress();
 
-    // 存储以太币事件
+    // 存储以太币事件 那个token 充值人sender 充值金额amount
     event DepositToken(
         address indexed tokenAddress,
         address indexed sender,
         uint256 amount
     );
 
-    // 提币事件
+    // 提币事件 那个token tokenAddress 发起人sender 接收人withdrawAddress 提币金额amount
     event WithdrawToken(
         address indexed tokenAddress,
         address sender,
@@ -47,31 +47,32 @@ contract TreasureManager is Initializable, OwnableUpgradeable, AccessControlUpgr
         uint256 amount
     );
 
-    // 授予奖励事件
+    // 授予奖励事件 tokenAddress 接收人granter 授予金额amount
     event GrantRewardTokenAmount(
         address indexed tokenAddress,
         address granter,
         uint256 amount
     );
 
-    // 提币管理器更新事件
+    // 授权提币地址更新事件
     event WithdrawManagerUpdate(
         address indexed withdrawManager
     );
 
-    // 仅允许宝藏管理器调用修饰符
+    // 仅允许address(treasureManager)调用
     modifier onlyTreasureManager() {
         require(msg.sender == address(treasureManager), "TreasureManager.onlyTreasureManager");
         _;
     }
 
-    // 仅允许提币管理器调用修饰符
+    // 仅允许提币address(withdrawManager)调用
     modifier onlyWithdrawManager() {
         require(msg.sender == address(withdrawManager), "TreasureManager.onlyWithdrawer");
         _;
     }
 
-    // 初始化函数，设置初始所有者，宝藏管理器和提币管理器
+    // 初始化函数，设置初始所有者，授权地址和提币地址
+    // 注意：在部署合约时，需要先设置treasureManager和withdrawManager
     function initialize(address _initialOwner, address _treasureManager, address _withdrawManager) public initializer {
         treasureManager = _treasureManager;
         withdrawManager = _withdrawManager;
