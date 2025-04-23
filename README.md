@@ -51,7 +51,22 @@ cast call --rpc-url 127.0.0.1:8545 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512 "t
 ```shell
 cast send --rpc-url 127.0.0.1:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512 --value 1000000000000000000000 
 ```
-
+### 判断一个地址是否是合约地址
+```shell
+cast code --rpc-url 127.0.0.1:8545 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
+```
+### owner
+```shell
+cast call --rpc-url 127.0.0.1:8545 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512 "owner()(address)"
+```
+### 升级合约
+```shell
+forge script ./script/TreasureManagerV2Script.s.sol:TreasureManagerV2Script --rpc-url 127.0.0.1:8545  --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --broadcast --overwrite
+```
+### 调用升级后的合约
+```shell
+cast call --rpc-url 127.0.0.1:8545 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512 "getValue()(uint256)" 
+```
 ###  验证合约：步骤分为生成验证数据和执行验证命令
 ###  设置 EtherScan API Key
 ```shell

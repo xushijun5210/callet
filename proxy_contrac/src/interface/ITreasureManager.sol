@@ -37,6 +37,6 @@ interface ITreasureManager {
     // 获取代币白名单列表
     function getTokenWhiteList() external view returns(address[] memory);
 
-    // 返回一个固定值（具体值未定义）
+    // 返回一个固定值（具体值未定义）// V2 版本加的代码，返回固定值函数
     function getValue() external pure returns(uint256);
 }
