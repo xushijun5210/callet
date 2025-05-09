@@ -10,7 +10,3 @@ pnpm install
 ```
 npx jest
 ```
-### 生成助记词
-```
-go get -u github.com/tyler-smith/go-bip39
-```
