@@ -1,3 +1,33 @@
+### 项目目录
+```shell
+uups
+proxy_contrac
+passphrase
+eth-wallet-sdk
+```
+### npx jest 运行测试
+```shell
+npx jest
+```
+### 安装forge
+```shell
+npm install -g @arcblock/forge-cli
+```
+### 安装依赖
+```shell
+npm install
+```
+### 编译合约
+```shell
+npx hardhat compile
+```
+### 运行测试
+```shell
+npx hardhat test
+```
+### 部署合约
+```shell
+
 ### 合约项目初始化
 ```shell
 forge init 项目名称
