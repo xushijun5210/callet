@@ -1,9 +1,9 @@
 ### 项目目录
 ```shell
 uups
-proxy_contrac
-passphrase
-eth-wallet-sdk
+proxy_contrac 合约升级
+Mnemonic 助记词
+eth-wallet-sdk 离线签名
 ```
 ### npx jest 运行测试
 ```shell

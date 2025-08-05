@@ -10,47 +10,47 @@ describe("eth wallet test", () => {
     });
     //根据助记词生成种子
     test("create seed", () => {
-        const mnemonic = "attend control tragic rough possible you coral jelly earn fringe bullet loop";
+        const mnemonic = "strike expose clean input matter exchange critic flip ask twenty path glove";
         const seed = mnemonicToSeed( { mnemonic: mnemonic, password: 'xushijun5210' });
         console.log("create seed===", seed.toString('hex'))
     });
     //助记词生成公钥,私钥和地址
     test("create address", () => {
-        const mnemonic = "attend control tragic rough possible you coral jelly earn fringe bullet loop";
+        const mnemonic = "strike expose clean input matter exchange critic flip ask twenty path glove";
         const seed = mnemonicToSeed( { mnemonic: mnemonic, password: '' });
         const addressInfo = createAddress(seed.toString('hex'), "0")
-        // {"privateKey":"0xc30e09a462d429803c0592db0c52a9cb0bdcbf80fb6cfe3ea351c9fd67e103c1",
-        // "publicKey":"0x0332950879b045701d360b60272cd98de440f269f73c5d29d23302d89cfbd3a1a5",
-        // "address":"0xee2E207D30383430a815390431298EBa3c1C8c2d"}
+        //{"privateKey":"0xdd896beb517d6ef3ba27d68f5117b2cbc0ebb0bad4ed2e481f786d6999bfea6b",
+        // "publicKey":"0x038de742233a575d9b60842f0c4dcebd652039ce7cf5682fa6951f40e63c7c6295",
+        // "address":"0x33C901956Aa770CEEFdCBb605883f47c5A48d83c"}
         console.log(addressInfo)
     });
      //公钥生成地址
      test("public key to address", () => {
-        const publicKey = "0x0332950879b045701d360b60272cd98de440f269f73c5d29d23302d89cfbd3a1a5";
+        const publicKey = "0x038de742233a575d9b60842f0c4dcebd652039ce7cf5682fa6951f40e63c7c6295";
         const address = publicKeyToAddress(publicKey)
-        //0xee2E207D30383430a815390431298EBa3c1C8c2d
+        //0x33C901956Aa770CEEFdCBb605883f47c5A48d83c
         console.log("public key to address===", address)
     })
     //私钥生成地址
     test("import eth wallet", () => {
-        const privateKey = "c30e09a462d429803c0592db0c52a9cb0bdcbf80fb6cfe3ea351c9fd67e103c1";
+        const privateKey = "dd896beb517d6ef3ba27d68f5117b2cbc0ebb0bad4ed2e481f786d6999bfea6b";
         const addressInfo = importEthWallet(privateKey)
-        // {"privateKey":"c30e09a462d429803c0592db0c52a9cb0bdcbf80fb6cfe3ea351c9fd67e103c1",
-        // "address":"0xee2E207D30383430a815390431298EBa3c1C8c2d"}
+        //{"privateKey":"dd896beb517d6ef3ba27d68f5117b2cbc0ebb0bad4ed2e481f786d6999bfea6b",
+        // "address":"0x33C901956Aa770CEEFdCBb605883f47c5A48d83c"}
         console.log("import eth wallet===", addressInfo)   
      });
      //验证给定的地址是否为有效的以太坊地址
      test("verify address", () => {
-        const isOk = verifyAddress("0xee2E207D30383430a815390431298EBa3c1C8c2d")
+        const isOk = verifyAddress("0x33C901956Aa770CEEFdCBb605883f47c5A48d83c")
         console.log("verify address===", isOk)
     })
     //签名交易
     test("sign transaction", async () => {
         const rawHex =  await signTransaction({
-            "privateKey": "c30e09a462d429803c0592db0c52a9cb0bdcbf80fb6cfe3ea351c9fd67e103c1",
+            "privateKey":"dd896beb517d6ef3ba27d68f5117b2cbc0ebb0bad4ed2e481f786d6999bfea6b",
             "nonce": 0,
-            "from": "0xee2E207D30383430a815390431298EBa3c1C8c2d",
-            "to": "0x72fFaA289993bcaDa2E01612995E5c75dD81cdBC",
+            "from": "0x33C901956Aa770CEEFdCBb605883f47c5A48d83c",
+            "to": "0x79a72cd9C1A3dc76BcA8e685fAB7c58eA51CB24a",
             "gasLimit": 91000,
             "amount": "0.01",
             "gasPrice": 195000000000,
@@ -60,36 +60,20 @@ describe("eth wallet test", () => {
         })
         console.log('sign transaction111===', rawHex)
     })
-   
     test("sign transaction", async () => {
-        const privateKey = "c30e09a462d429803c0592db0c52a9cb0bdcbf80fb6cfe3ea351c9fd67e103c1";
-        const nonce = 0;
-        const from = "0xee2E207D30383430a815390431298EBa3c1C8c2d";
-        const to = "0x72fFaA289993bcaDa2E01612995E5c75dD81cdBC";
-        const gasLimit = 21000;
-        const gasPrice = 10000000000;
-        const amount = '0.01';
-        const data = "";
-        const chainId = 1;
-        const decimal = 18;
-        const maxPriorityFeePerGas = 1000000000;
-        const tokenAddress = "0x00";
-        const params = {
-            privateKey,
-            nonce,
-            from,
-            to,
-            gasLimit,
-            gasPrice,
-            amount,
-            data,
-            chainId,
-            decimal,
-            maxPriorityFeePerGas,
-            tokenAddress
-        };
-        const signedTx = await signTransaction(params);
-        console.log("sign transaction===", signedTx)
+        const rawHex =  await signTransaction({
+            "privateKey": "dd896beb517d6ef3ba27d68f5117b2cbc0ebb0bad4ed2e481f786d6999bfea6b",
+            "nonce": 1,
+            "from": "0x33C901956Aa770CEEFdCBb605883f47c5A48d83c",
+            "to": "0x79a72cd9C1A3dc76BcA8e685fAB7c58eA51CB24a",
+            "gasLimit": 91000,
+            "amount": "0.01",
+            "gasPrice": 195000000000,
+            "decimal": 18,
+            "chainId": 11155111,
+            "tokenAddress": "0x00"
+        })
+        console.log("sign transaction===", rawHex)
     })
     //签名eip1559交易
     test("sign eip1559 transaction", async () => {
@@ -103,9 +87,9 @@ describe("eth wallet test", () => {
             "gasLimit": 91000,
             "maxFeePerGas": 45000000000,
             "maxPriorityFeePerGas": 35000000000,
-            "decimal": 6,
-            "chainId": 137,
-            "tokenAddress": "0x84eBc138F4Ab844A3050a6059763D269dC9951c6"
+            "decimal": 18,
+            "chainId": 11155111,
+            "tokenAddress": "0x00"
         })
         console.log('sign eip1559 transaction===', rawHex)
     })

@@ -1,5 +1,5 @@
 {
-  "name": "passphrase",
+  "name": "mnemonic",
   "version": "1.0.0",
   "description": "wallet include hd and AA wallet",
   "main": "dist/cjs/index.js",
